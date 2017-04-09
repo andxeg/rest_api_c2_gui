@@ -2,15 +2,15 @@ import os
 from config import Config
 from rest_messenger import RESTMessenger
 from handlers.test_handlers.tasks_lists import TasksList
+from handlers.account.get_account import GetAccountInfo
 
 CONFIG_FILE = "rest_config.json"
 
 
 def add_handlers(messenger):
-    messenger.add_handler(TasksList.url_request,
-                          TasksList,
-                          TasksList.methods,
-                          async=True)
+    messenger.add_handler(TasksList.url_request, TasksList, TasksList.methods, async=True)
+    messenger.add_handler(GetAccountInfo.url_request, GetAccountInfo, GetAccountInfo.methods, async=False)
+
 
 if __name__ == '__main__':
     # TODO RESTMessenger go into infinite loop
@@ -33,3 +33,5 @@ if __name__ == '__main__':
     rest_messenger.print_attributes()
     add_handlers(rest_messenger)
     rest_messenger.run()
+
+    print "FINISH"

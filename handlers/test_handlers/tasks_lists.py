@@ -6,10 +6,10 @@ import threading
 import requests
 import copy
 
-from flask import Flask, jsonify
-from flask import abort, make_response
+from flask import jsonify
+from flask import abort
 from flask import request
-from flask.views import MethodView
+from handlers.base_rest_handler import BaseRESTHandler
 
 MODULE_NAME = "SERVER"
 
@@ -29,9 +29,8 @@ tasks = [
 ]
 
 
-class TasksList(MethodView):
-    url_request = "/todo/api/v1.0/tasks"
-    url_response = None
+class TasksList(BaseRESTHandler):
+    url_request = "tasks"
     methods = ['GET', 'POST']
 
     # Synchronous message
@@ -79,5 +78,6 @@ class TasksList(MethodView):
         print('%s | Receive ack from %s' % (MODULE_NAME, self.url_response))
         print json.dumps(response.json(), indent=4, sort_keys=True)
 
+        self.messenger.print_attributes()
 
         return

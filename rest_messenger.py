@@ -9,6 +9,7 @@ class RESTMessenger(object):
         self.host = server_config.get("host", "127.0.0.1")
         self.port = server_config.get("port", "5000")
         self.debug = server_config.get("debug", False)
+        self.base_url = server_config.get("base_url", "/")
         self.response_address = None
 
         if async:
@@ -37,8 +38,13 @@ class RESTMessenger(object):
             else:
                 raise Exception("async handler has not url for response")
 
-        view_func = class_handler.as_view(str(class_handler.__class__.__name__))
-        self.app.add_url_rule(rule, view_func=view_func, methods=methods)
+        class_handler.messenger = self
+        view_func = class_handler.as_view(str(class_handler.__name__))
+        handler_url = self.base_url + '/' + rule
+        self.app.add_url_rule(handler_url,
+                              # endpoint=str(class_handler.__class__.__name__),
+                              view_func=view_func,
+                              methods=methods)
 
     def run(self):
         self.app.run(host=self.host, port=self.port, debug=self.debug)

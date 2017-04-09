@@ -2,7 +2,8 @@
 	"c2_config": {
 		"host": "0.0.0.0",
     	"port": "5007",
-    	"debug": false
+    	"debug": false,
+		"base_url": "/todo/api/v1.0"
 	},
 
 	"oss_bss_config": {

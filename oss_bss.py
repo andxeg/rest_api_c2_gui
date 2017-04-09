@@ -41,3 +41,5 @@ if __name__ == '__main__':
     print("%s | Receive ack from '%s'" % (MODULE_NAME, C2_ADDRESS))
 
     rest_messenger.run()
+
+    print "FINISH"
