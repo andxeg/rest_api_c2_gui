@@ -1,0 +1,14 @@
+1.  GET запрос. Получение описания всех задач.
+    curl -i http://localhost:5000/todo/api/v1.0/tasks
+
+2.  GET запрос. Получение описания задачи по id.
+    curl -i http://localhost:5000/todo/api/v1.0/tasks/2
+
+3.  POST запрос. Добавление задачи.
+    curl -i -H "Content-Type: application/json" -X POST -d '{"title":"Read a book"}' http://localhost:5000/todo/api/v1.0/tasks
+
+4.  PUT запрос. Изменение задачи.
+    curl -i -H "Content-Type: application/json" -X PUT -d '{"done":true}' http://localhost:5000/todo/api/v1.0/tasks/2
+
+5.  DELETE запрос. Удаление по запросы id.
+    curl -i -X DELETE http://localhost:5000/todo/api/v1.0/tasks/2

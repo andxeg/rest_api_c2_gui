@@ -1,0 +1,13 @@
+{
+	"c2_config": {
+		"host": "0.0.0.0",
+    	"port": "5007",
+    	"debug": false
+	},
+
+	"oss_bss_config": {
+		"notify": "oss_bss/notify",
+        "host": "0.0.0.0",
+        "port": "5001"
+	}
+}
