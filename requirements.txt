@@ -1,3 +1,21 @@
-1. Flask
-2. flask_httpauth
-3. requests
+Needed library.
+
+PYTHON:
+1.  Flask
+2.  flask_httpauth
+3.  requests
+4. pip install pyopenssl
+5. pip install -U requests[security]
+6.
+
+OS:
+1.  openssl. Generate keys.
+    a.  openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout private.key -out self_signed.crt -subj /CN=0.0.0.0
+        CN - Common Name
+    b.  http://www.akadia.com/services/ssh_test_certificate.html
+    c.  Эффект такое же, как и в предыдущих ссылках
+        !!!!http://unix.stackexchange.com/questions/90450/adding-a-self-signed-certificate-to-the-trusted-list
+
+
+2.
+3.

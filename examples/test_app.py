@@ -4,9 +4,12 @@ from flask import request
 from flask import url_for
 
 from flask_httpauth import HTTPBasicAuth
-from md5 import md5
-import time
 
+import os
+import time
+from md5 import md5
+
+from OpenSSL import SSL
 
 app = Flask(__name__)
 auth = HTTPBasicAuth()
@@ -55,7 +58,7 @@ def not_found(error):
 
 
 @app.route('/todo/api/v1.0/tasks', methods=['GET'])
-# @auth.login_required
+@auth.login_required
 def get_tasks():
     return jsonify({'tasks': map(make_public_task, tasks)})
 
@@ -128,11 +131,19 @@ def make_public_task(task):
     return new_task
 
 
-@app.route('/')
-def index():
-    response = make_response(jsonify({'tasks': tasks}), 201)
-    response.set_cookie("username", "the username")
-    return response
+# @app.route('/')
+# def index():
+#     response = make_response(jsonify({'tasks': tasks}), 201)
+#     response.set_cookie("username", "the username")
+#     return response
 
 if __name__ == '__main__':
-    app.run(debug=True, threaded=True)
+    context = SSL.Context(SSL.SSLv23_METHOD)
+    key = os.path.join(os.path.dirname(__file__), '../ssl/private.key')
+    cer = os.path.join(os.path.dirname(__file__), '../ssl/self_signed.crt')
+    context = (cer, key)
+    app.run(host="0.0.0.0",
+            port=5000,
+            debug=True,
+            threaded=True,
+            ssl_context=context)

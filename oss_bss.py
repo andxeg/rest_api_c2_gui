@@ -2,17 +2,17 @@ import os
 import requests
 from config import Config
 from rest_messenger import RESTMessenger
-from handlers.test_handlers.notify_handler import NotifyHandler
+from handlers.test_handlers.notify_handler import NotifyMsg
 
 CONFIG_FILE = "oss_bss_config.json"
-C2_ADDRESS = "http://0.0.0.0:5007/todo/api/v1.0/tasks"
+C2_ADDRESS = "https://0.0.0.0:5007/todo/api/v1.0/tasks"
 MODULE_NAME = "OSS_BSS"
 
 
 def add_handlers(messenger):
-    messenger.add_handler(NotifyHandler.url_request,
-                          NotifyHandler,
-                          NotifyHandler.methods,
+    messenger.add_handler(NotifyMsg.url_request,
+                          NotifyMsg,
+                          NotifyMsg.methods,
                           async=False)
 
 
@@ -26,7 +26,8 @@ if __name__ == '__main__':
 
     rest_messenger = RESTMessenger(server_config=oss_bss_config_dict,
                                    client_config=c2_config_dict,
-                                   async=False)
+                                   async=False,
+                                   ssl=False)
 
     rest_messenger.print_attributes()
     add_handlers(rest_messenger)
@@ -37,7 +38,8 @@ if __name__ == '__main__':
     }
 
     print("%s | Before send request to '%s'" % (MODULE_NAME, C2_ADDRESS))
-    response = requests.post(C2_ADDRESS, json=data)
+    verify = oss_bss_config_dict["ssl"]["verify"]
+    response = requests.post(C2_ADDRESS, json=data, verify=verify)
     print("%s | Receive ack from '%s'" % (MODULE_NAME, C2_ADDRESS))
 
     rest_messenger.run()

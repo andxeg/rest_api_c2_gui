@@ -28,7 +28,8 @@ if __name__ == '__main__':
 
     rest_messenger = RESTMessenger(server_config=c2_config_dict,
                                    client_config=oss_bss_config_dict,
-                                   async=True)
+                                   async=True,
+                                   ssl=True)
 
     rest_messenger.print_attributes()
     add_handlers(rest_messenger)

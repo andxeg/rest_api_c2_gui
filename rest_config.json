@@ -3,7 +3,11 @@
 		"host": "0.0.0.0",
     	"port": "5007",
     	"debug": false,
-		"base_url": "/todo/api/v1.0"
+		"base_url": "/todo/api/v1.0",
+		"ssl" : {
+			"key": "./ssl/private.key",
+			"crt": "./ssl/self_signed.crt"
+		}
 	},
 
 	"oss_bss_config": {

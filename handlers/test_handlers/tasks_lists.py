@@ -9,7 +9,7 @@ import copy
 from flask import jsonify
 from flask import abort
 from flask import request
-from handlers.base_rest_handler import BaseRESTHandler
+from handlers.base_rest_msg import BaseRESTMsg
 
 MODULE_NAME = "SERVER"
 
@@ -29,7 +29,7 @@ tasks = [
 ]
 
 
-class TasksList(BaseRESTHandler):
+class TasksList(BaseRESTMsg):
     url_request = "tasks"
     methods = ['GET', 'POST']
 

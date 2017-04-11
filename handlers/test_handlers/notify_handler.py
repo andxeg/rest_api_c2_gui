@@ -3,13 +3,13 @@
 import json
 from flask import jsonify
 from flask import request
-from handlers.base_rest_handler import BaseRESTHandler
+from handlers.base_rest_msg import BaseRESTMsg
 
 
 MODULE_NAME = "OSS_BSS"
 
 
-class NotifyHandler(BaseRESTHandler):
+class NotifyMsg(BaseRESTMsg):
     url_request = "oss_bss/notify"
     methods = ['POST']
 
