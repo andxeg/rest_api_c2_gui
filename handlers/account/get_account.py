@@ -10,9 +10,6 @@ class GetAccountInfo(AccountRESTMsg):
     def __init__(self):
         super(GetAccountInfo, self).__init__()
 
-    def get(self):
-        pass
-
     def post(self):
         print "request-> ", request
         print "request.json -> ", json.dumps(request.json, indent=4, sort_keys=True)
@@ -22,3 +19,18 @@ class GetAccountInfo(AccountRESTMsg):
             "id": 1
         }
         return jsonify({'account': account})
+
+    def _parse_request(self, request_obj):
+        try:
+            result = super(GetAccountInfo, self)._parse_request(request_obj)
+        except Exception as e:
+            print e
+            return False
+
+        if result:
+            return self._parse(request_obj)
+        else:
+            return False
+
+    def _parse(self, request_obj):
+        pass

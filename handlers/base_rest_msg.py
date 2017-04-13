@@ -9,6 +9,7 @@ class BaseRESTMsg(MethodView):
 
     def __init__(self):
         # Attributes
+        self.requestId = None
         self.accountPrivateId = None
         self.accountPublicId = None
         self.privateId = None
@@ -18,8 +19,24 @@ class BaseRESTMsg(MethodView):
         self.creationTime = None
         self.updateTime = None
 
-    def get(self):
+    def post(self):
         pass
 
-    def post(self):
+    def _parse_request(self, request_obj):
+        auth_manager = self.messenger.get_auth_manager()
+        if auth_manager is None:
+            return self._simple_parse_base_msg(request_obj)
+        else:
+            return self._parse_base_msg(request_obj)
+
+        # if parser return false then derived class not needed
+        # launch it's own parser. False return when there is
+        # problem with authentication
+        # If problem with parsing then raise Exception
+
+    def _simple_parse_base_msg(self, request_obj):
+        pass
+
+    def _parse_base_msg(self, request_obj):
+        # auth_manager = self.messenger.get_auth_manager()
         pass

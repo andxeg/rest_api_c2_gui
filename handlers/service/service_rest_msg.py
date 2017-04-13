@@ -9,8 +9,5 @@ class ServiceRESTMsg(BaseRESTMsg):
         super(ServiceRESTMsg, self).__init__()
         # Characteristics
 
-    def get(self):
-        pass
-
     def post(self):
         pass

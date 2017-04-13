@@ -17,6 +17,7 @@ class RESTMessenger(object):
         '''
 
         self.app = Flask(__name__)
+        self.auth_manager = None
         self.host = server_config.get("host", "127.0.0.1")
         self.port = server_config.get("port", "5000")
         self.debug = server_config.get("debug", False)
@@ -27,11 +28,11 @@ class RESTMessenger(object):
         self.context = None
 
         if async is True:
-            self.set_notify_address(client_config)
+            self.__set_notify_address(client_config)
 
         if ssl is True:
             ssl_config = server_config.get("ssl", None)
-            self.set_ssl_context(ssl_config)
+            self.__set_ssl_context(ssl_config)
 
     def add_handler(self, rule, class_handler, methods, url_response=None, async=True):
         if async:
@@ -64,7 +65,7 @@ class RESTMessenger(object):
             if not callable(attr):
                 print "Name -> '%s', Value -> '%s'" % (attr_name, str(attr),)
 
-    def set_notify_address(self, client_config):
+    def __set_notify_address(self, client_config):
         try:
             notify = "http://" + \
                      client_config["host"] + \
@@ -79,7 +80,7 @@ class RESTMessenger(object):
 
         self.response_address = notify
 
-    def set_ssl_context(self, server_config):
+    def __set_ssl_context(self, server_config):
         self.context = SSL.Context(SSL.SSLv23_METHOD)
         try:
             private_key = server_config["key"]
@@ -95,3 +96,12 @@ class RESTMessenger(object):
                             "Exception '%s'" % (e,))
 
         self.context = (cer, key)
+
+    def get_auth_manager(self):
+        return self.auth_manager
+
+    def set_auth_manager(self, auth_manager):
+        self.auth_manager = auth_manager
+        handlers = self.auth_manager.get_handlers()
+        for handler in handlers:
+            self.add_handler(handler.url_request, handler, handler.methods, async=False)
