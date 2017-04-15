@@ -8,6 +8,9 @@ class BaseRESTMsg(MethodView):
     messenger = None
 
     def __init__(self):
+        # Sender cuuid
+        self.senderId = None
+
         # Attributes
         self.requestId = None
         self.accountPrivateId = None

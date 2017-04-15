@@ -8,7 +8,7 @@ PYTHON:
 !   5.  pip install -U requests[security]
 !   6.  Install not for Python 2.7 Json Web Token -> pip install pyjwt==1.4.2
         Before installation uninstall old jwt and pyjwt
-!   7.  pip install Flask-Bcrypt
+    7.  Не нужно. pip install Flask-Bcrypt
 
 OS:
 !   1.  openssl. Generate keys.
