@@ -3,6 +3,10 @@ from config import Config
 from rest_messenger import RESTMessenger
 from handlers.test_handlers.tasks_lists import TasksList
 from handlers.account.get_account import GetAccountInfo
+from auth.auth_manager import AuthManager
+from auth.login_msg import LoginRESTMsg
+from auth.logout_msg import LogoutRESTMsg
+
 
 CONFIG_FILE = "rest_config.json"
 
@@ -33,6 +37,12 @@ if __name__ == '__main__':
 
     rest_messenger.print_attributes()
     add_handlers(rest_messenger)
+
+    auth_manager = AuthManager()
+    handler_list = [LoginRESTMsg, LogoutRESTMsg]
+    auth_manager.add_handler_list(handler_list)
+    rest_messenger.set_auth_manager(auth_manager)
+
     rest_messenger.run()
 
     print "FINISH"
