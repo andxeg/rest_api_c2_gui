@@ -6,6 +6,7 @@ from handlers.account.get_account import GetAccountInfo
 from auth.auth_manager import AuthManager
 from auth.login_msg import LoginRESTMsg
 from auth.logout_msg import LogoutRESTMsg
+from auth.status_msg import StatusRESTMsg
 
 
 CONFIG_FILE = "rest_config.json"
@@ -39,7 +40,7 @@ if __name__ == '__main__':
     add_handlers(rest_messenger)
 
     auth_manager = AuthManager()
-    handler_list = [LoginRESTMsg, LogoutRESTMsg]
+    handler_list = [LoginRESTMsg, LogoutRESTMsg, StatusRESTMsg]
     auth_manager.add_handler_list(handler_list)
     rest_messenger.set_auth_manager(auth_manager)
 

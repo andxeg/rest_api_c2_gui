@@ -15,11 +15,11 @@
 
 6.  LOGIN
     curl -i -H "Content-Type: application/json" \
-     -X POST -d '{"name":"admin", "password":"admin"}' http://localhost:5000/auth/login --cacert ./ssl/self_signed.crt
+    -X POST -d '{"name":"admin", "password":"admin"}' http://localhost:5000/auth/login --cacert ./ssl/self_signed.crt
 
 7.  STATUS
     curl -i -H "Content-Type: application/json" \
-    -H "Authorization: Bearer token" -X GET http://localhost:5000/auth/status
+    -H "Authorization: Bearer token" -X POST http://localhost:5000/auth/status
 
 8.  LOGOUT
     curl -i -H "Content-Type: application/json"  \

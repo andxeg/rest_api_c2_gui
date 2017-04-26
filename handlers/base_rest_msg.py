@@ -22,12 +22,15 @@ class BaseRESTMsg(MethodView):
         self.creationTime = None
         self.updateTime = None
 
+        # Auth Manager
+        self.auth_manager = self.messenger.get_auth_manager()
+
     def post(self):
-        pass
+        raise NotImplementedError
 
     def _parse_request(self, request_obj):
-        auth_manager = self.messenger.get_auth_manager()
-        if auth_manager is None:
+
+        if self.auth_manager is None:
             return self._simple_parse_base_msg(request_obj)
         else:
             return self._parse_base_msg(request_obj)

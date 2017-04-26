@@ -24,7 +24,7 @@ class AccountRESTMsg(BaseRESTMsg):
         self.externalIp = None
 
     def post(self):
-        pass
+        raise NotImplementedError
 
     def _parse_request(self, request_obj):
         try:

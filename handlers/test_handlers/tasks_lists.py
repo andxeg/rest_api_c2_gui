@@ -73,6 +73,7 @@ class TasksList(BaseRESTMsg):
         print('%s | Sending request to %s' % (MODULE_NAME, self.url_response))
         data = {'status': 'Done', 'task': task}
 
+        # TODO check if connection exist
         response = requests.post(self.url_response, json=data)
 
         print('%s | Receive ack from %s' % (MODULE_NAME, self.url_response))

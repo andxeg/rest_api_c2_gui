@@ -11,7 +11,7 @@ class BaseAuthMsg(MethodView):
         self.auth_manager = self.messenger.get_auth_manager()
 
     def post(self):
-        pass
+        raise NotImplementedError
 
     @classmethod
     def create_error_msg(cls, print_info=None, message=None):

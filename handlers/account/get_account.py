@@ -1,6 +1,7 @@
 import json
 from flask import jsonify
 from flask import request
+from flask import make_response
 from handlers.account.account_rest_msg import AccountRESTMsg
 
 
@@ -18,7 +19,11 @@ class GetAccountInfo(AccountRESTMsg):
             "last_name": "Chupakhin",
             "id": 1
         }
-        return jsonify({'account': account})
+
+        response_object = {
+            "account": account
+        }
+        return make_response(jsonify(response_object)), 200
 
     def _parse_request(self, request_obj):
         try:

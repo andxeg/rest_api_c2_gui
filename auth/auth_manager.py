@@ -55,7 +55,7 @@ class AuthManager(object):
         return user_id, error
 
     @classmethod
-    def __find_user(cls, user_name):
+    def __find_user_by_name(cls, user_name):
         for user_id, user in users.items():
             if user["name"] == user_name:
                 return user_id, user
@@ -63,8 +63,15 @@ class AuthManager(object):
         return None, None
 
     @classmethod
+    def find_user_by_id(cls, user_id):
+        if user_id in users:
+            return users[user_id]
+
+        return None
+
+    @classmethod
     def check_password(cls, user_name, password):
-        user_id, user = cls.__find_user(user_name)
+        user_id, user = cls.__find_user_by_name(user_name)
         if user is None:
             return None
 
