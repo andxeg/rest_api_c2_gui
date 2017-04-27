@@ -31,12 +31,12 @@ class AccountRESTMsg(BaseRESTMsg):
             result = super(AccountRESTMsg, self)._parse_request(request_obj)
         except Exception as e:
             print e
+            raise
+
+        if not result:
             return False
 
-        if result:
-            return self._parse_account_msg(request_obj)
-        else:
-            return result
+        return self._parse_account_msg(request_obj)
 
     def _parse_account_msg(self, request_obj):
         pass

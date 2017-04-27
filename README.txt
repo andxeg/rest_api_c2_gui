@@ -9,3 +9,7 @@
 
 9.  Json Web Tokens. Good link!!!
     https://realpython.com/blog/python/token-based-authentication-with-flask/
+
+10. Python datetime.
+    How create from string datetime object -> http://stackoverflow.com/questions/466345/converting-string-into-datetime
+    Read also -> http://strftime.org/

@@ -25,6 +25,9 @@ class GetAccountInfo(AccountRESTMsg):
         }
         return make_response(jsonify(response_object)), 200
 
+
+
+
     def _parse_request(self, request_obj):
         try:
             result = super(GetAccountInfo, self)._parse_request(request_obj)
@@ -32,10 +35,10 @@ class GetAccountInfo(AccountRESTMsg):
             print e
             return False
 
-        if result:
-            return self._parse(request_obj)
-        else:
+        if not result:
             return False
+
+        return self._parse(request_obj)
 
     def _parse(self, request_obj):
         pass
