@@ -75,8 +75,12 @@ class BaseRESTMsg(MethodView):
 
     def __check_auth_token(self, request_obj):
         auth_header = request_obj.headers.get("Authorization")
+
         if auth_header:
-            auth_token = auth_header.split(" ")[1]
+            try:
+                auth_token = auth_header.split(" ")[1]
+            except Exception as e:
+                raise Exception("BaseRESTMsg. Error in Authorization header.")
         else:
             auth_token = ""
 

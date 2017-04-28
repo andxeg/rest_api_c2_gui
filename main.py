@@ -1,15 +1,14 @@
 import os
-from config import Config
-from rest_messenger import RESTMessenger
-from handlers.test_handlers.tasks_lists import TasksList
-from handlers.account.get_account import GetAccountInfo
 from auth.auth_manager import AuthManager
 from auth.login_msg import LoginRESTMsg
 from auth.logout_msg import LogoutRESTMsg
 from auth.status_msg import StatusRESTMsg
+from config.config import Config
+from handlers.account.get_account import GetAccountInfo
+from handlers.test_handlers.tasks_lists import TasksList
+from rest_messenger import RESTMessenger
 
-
-CONFIG_FILE = "rest_config.json"
+CONFIG_FILE = "./config/rest_config.json"
 
 
 def add_handlers(messenger):

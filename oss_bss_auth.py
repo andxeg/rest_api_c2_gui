@@ -1,11 +1,13 @@
-import os
 import json
-import requests
-from config import Config
-from rest_messenger import RESTMessenger
-from handlers.test_handlers.notify_handler import NotifyMsg
+import os
 
-CONFIG_FILE = "oss_bss_config.json"
+import requests
+
+from config.config import Config
+from handlers.test_handlers.notify_handler import NotifyMsg
+from rest_messenger import RESTMessenger
+
+CONFIG_FILE = "./config/oss_bss_config.json"
 C2_ADDRESS = "https://0.0.0.0:5007/todo/api/v1.0"
 MODULE_NAME = "OSS_BSS"
 
@@ -65,38 +67,17 @@ if __name__ == '__main__':
         "method": "full"
     }
 
-    print("%s | Before send request to '%s'" % (MODULE_NAME, C2_GET_ACCOUNT_INFO))
-    response = requests.post(C2_GET_ACCOUNT_INFO,
-                             json=data,
-                             verify=verify,
-                             headers={
-                                 "Authorization": "Bearer " + auth_token
-                             })
+    for i in range(3):
+        print("%s | Before send request to '%s'" % (MODULE_NAME, C2_GET_ACCOUNT_INFO))
+        response = requests.post(C2_GET_ACCOUNT_INFO,
+                                 json=data,
+                                 verify=verify,
+                                 headers={
+                                     "Authorization": "Bearer " + auth_token
+                                 })
 
-    print("%s | Receive ack from '%s'" % (MODULE_NAME, C2_GET_ACCOUNT_INFO))
-    print json.dumps(response.json(), indent=4, sort_keys=True)
-
-    print("%s | Before send request to '%s'" % (MODULE_NAME, C2_GET_ACCOUNT_INFO))
-    response = requests.post(C2_GET_ACCOUNT_INFO,
-                             json=data,
-                             verify=verify,
-                             headers={
-                                 "Authorization": "Bearer " + auth_token
-                             })
-
-    print("%s | Receive ack from '%s'" % (MODULE_NAME, C2_GET_ACCOUNT_INFO))
-    print json.dumps(response.json(), indent=4, sort_keys=True)
-
-    print("%s | Before send request to '%s'" % (MODULE_NAME, C2_GET_ACCOUNT_INFO))
-    response = requests.post(C2_GET_ACCOUNT_INFO,
-                             json=data,
-                             verify=verify,
-                             headers={
-                                 "Authorization": "Bearer " + auth_token
-                             })
-
-    print("%s | Receive ack from '%s'" % (MODULE_NAME, C2_GET_ACCOUNT_INFO))
-    print json.dumps(response.json(), indent=4, sort_keys=True)
+        print("%s | Receive ack from '%s'" % (MODULE_NAME, C2_GET_ACCOUNT_INFO))
+        print json.dumps(response.json(), indent=4, sort_keys=True)
 
     rest_messenger.run(threaded=True)
 

@@ -1,10 +1,12 @@
 import os
-import requests
-from config import Config
-from rest_messenger import RESTMessenger
-from handlers.test_handlers.notify_handler import NotifyMsg
 
-CONFIG_FILE = "oss_bss_config.json"
+import requests
+
+from config.config import Config
+from handlers.test_handlers.notify_handler import NotifyMsg
+from rest_messenger import RESTMessenger
+
+CONFIG_FILE = "./config/oss_bss_config.json"
 C2_ADDRESS = "https://0.0.0.0:5007/todo/api/v1.0/tasks"
 MODULE_NAME = "OSS_BSS"
 
