@@ -14,7 +14,7 @@ CONFIG_FILE = "rest_config.json"
 
 def add_handlers(messenger):
     messenger.add_handler(TasksList.url_request, TasksList, TasksList.methods, async=True)
-    messenger.add_handler(GetAccountInfo.url_request, GetAccountInfo, GetAccountInfo.methods, async=False)
+    messenger.add_handler(GetAccountInfo.url_request, GetAccountInfo, GetAccountInfo.methods, async=True)
 
 
 if __name__ == '__main__':
@@ -36,7 +36,7 @@ if __name__ == '__main__':
                                    async=True,
                                    ssl=True)
 
-    rest_messenger.print_attributes()
+    # rest_messenger.print_attributes()
     add_handlers(rest_messenger)
 
     auth_manager = AuthManager()
@@ -44,6 +44,6 @@ if __name__ == '__main__':
     auth_manager.add_handler_list(handler_list)
     rest_messenger.set_auth_manager(auth_manager)
 
-    rest_messenger.run()
+    rest_messenger.run(threaded=True)
 
     print "FINISH"

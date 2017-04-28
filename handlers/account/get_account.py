@@ -1,3 +1,4 @@
+import time
 import json
 from flask import jsonify
 from flask import request
@@ -36,21 +37,24 @@ class GetAccountInfo(AccountRESTMsg):
         }
 
         if self.method == "short":
-            pass
+            response_object = {
+                "account": account
+            }
+
+            return make_response(jsonify(response_object)), 200
+
         elif self.method == "full":
-            account["email"] = "bob_dylan@gmail.com"
-            account["sex"] = "male"
+            self._launch_async_handler(self.async_handler, self.request_dict)
+            response_object = {
+                "status": "processing",
+            }
+            return make_response(jsonify(response_object)), 200
+
         else:
-            response_object = self._create_error_msg(print_info="Error in field 'method'",
-                                                     message="Error in field 'method'")
+            response_object = self._create_error_msg(print_info="GetAccountInfo. Error in field 'method'",
+                                                     message="GetAccountInfo. Error in field 'method'")
 
             return make_response(jsonify(response_object)), 500
-
-        response_object = {
-            "account": account
-        }
-
-        return make_response(jsonify(response_object)), 200
 
     def _parse_request(self, request_obj):
         # raise exception when error in parsing
@@ -65,3 +69,22 @@ class GetAccountInfo(AccountRESTMsg):
                                          "GetAccountInfo")
         except Exception as e:
             raise
+
+    def async_handler(self, request_dict):
+        print "Async processing start"
+        account = {
+            "first_name": "Bob",
+            "last_name": "Dylan",
+            "id": 1,
+            "email": "bob_dylan@gmail.com",
+            "sex": "male",
+        }
+
+        time.sleep(10)
+        print "Async processing end"
+
+        response_dict = {
+            "account": account
+        }
+
+        self._send_response(response_dict)

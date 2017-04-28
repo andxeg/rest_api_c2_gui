@@ -17,26 +17,21 @@
     a.  curl -i -H "Content-Type: application/json" \
     -X POST -d '{"name":"admin", "password":"admin"}' https://localhost:5000/auth/login --cacert ./ssl/self_signed.crt
 
-    b.  curl -i -H "Content-Type: application/json" -X POST -d \
-    '{"name":"admin", "password":"admin"}' https://0.0.0.0:5007/todo/api/v1.0/auth/login --cacert ./ssl/self_signed.crt
+    b.  curl -i -H "Content-Type: application/json" -X POST -d '{"name":"admin", "password":"admin"}' https://0.0.0.0:5007/todo/api/v1.0/auth/login --cacert ./ssl/self_signed.crt
 
 7.  STATUS
     a.  curl -i -H "Content-Type: application/json" \
     -H "Authorization: Bearer token" -X POST https://0.0.0.0:5007/todo/api/v1.0/auth/status --cacert ./ssl/self_signed.crt
 
-    b.  curl -i -H "Content-Type: application/json" -H "Authorization: Bearer token" \
-    -X POST https://0.0.0.0:5007/todo/api/v1.0/auth/status --cacert ./ssl/self_signed.crt
+    b.  curl -i -H "Content-Type: application/json" -H "Authorization: Bearer token"  -X POST https://0.0.0.0:5007/todo/api/v1.0/auth/status --cacert ./ssl/self_signed.crt
 
 8.  LOGOUT
     a. curl -i -H "Content-Type: application/json"  \
     -H "Authorization: Bearer token" -X POST http://localhost:5000/auth/logout
 
-    b. curl -i -H "Content-Type: application/json" -H "Authorization: Bearer token" \
-    -X POST https://0.0.0.0:5007/todo/api/v1.0/auth/logout --cacert ./ssl/self_signed.crt
+    b. curl -i -H "Content-Type: application/json" -H "Authorization: Bearer token"  -X POST https://0.0.0.0:5007/todo/api/v1.0/auth/logout --cacert ./ssl/self_signed.crt
 
 9.  For https set --cacert <CA certificate>
 
 10. account/get
-    a.  curl -i -H "Content-Type: application/json" -H "Authorization: Bearer token" \
-    -X POST -d '{"requestId": "1234", "attributes": {"type": "type", "accountPublicId": "accountPublicId", "accountPrivateId": "accountPrivateId", "privateId": "privateId", "publicId": "publicId"}, "method": "full"}' \
-    https://0.0.0.0:5007/todo/api/v1.0/account/get  --cacert ./ssl/self_signed.crt
+    a.  curl -i -H "Content-Type: application/json" -H "Authorization: Bearer token"  -X POST -d '{"requestId": "1234", "attributes": {"type": "type", "accountPublicId": "accountPublicId", "accountPrivateId": "accountPrivateId", "privateId": "privateId", "publicId": "publicId"}, "method": "full"}'  https://0.0.0.0:5007/todo/api/v1.0/account/get  --cacert ./ssl/self_signed.crt

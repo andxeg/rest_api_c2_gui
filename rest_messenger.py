@@ -7,14 +7,14 @@ from OpenSSL import SSL
 
 class RESTMessenger(object):
     def __init__(self, server_config=None, client_config=None, async=False, ssl=False):
-        '''
+        """
             :param server_config: dict 
             :param client_config: dict
-            :param async: bool 
-            If async then messenger can process 
+            :param async: bool
+             If async then messenger can process 
             async requests and config must contain
             notify client's address 
-        '''
+        """
 
         self.app = Flask(__name__)
         self.auth_manager = None
@@ -52,11 +52,12 @@ class RESTMessenger(object):
                               view_func=view_func,
                               methods=methods)
 
-    def run(self):
+    def run(self, threaded=False):
         self.app.run(host=self.host,
                      port=self.port,
                      debug=self.debug,
-                     ssl_context=self.context)
+                     ssl_context=self.context,
+                     threaded=threaded)
 
     def print_attributes(self):
         attributes = dir(self)

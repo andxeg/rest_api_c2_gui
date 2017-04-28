@@ -1,3 +1,7 @@
+import time
+import json
+import requests
+import threading
 from flask import jsonify
 from flask import request
 from flask import make_response
@@ -94,12 +98,12 @@ class BaseRESTMsg(MethodView):
     def _parse_necessary_fields(self, request_dict, necessary_fields, handler_name):
         for field in necessary_fields:
             if field not in request_dict:
-                raise Exception("%s. Request has't necessary field '%s'" % (field, handler_name))
+                raise Exception("%s. Request has't necessary field '%s'" % (handler_name, field))
 
             field_value = request_dict[field]
 
             if not hasattr(self, field):
-                raise Exception("%s hasn't field with name '%s'" % (field, handler_name))
+                raise Exception("%s hasn't field with name '%s'" % (handler_name, field))
 
             try:
                 setattr(self, field, field_value)
@@ -119,6 +123,8 @@ class BaseRESTMsg(MethodView):
         if not self.request_dict:
             raise Exception("Request hasn't a json")
 
+        # print self.request_dict
+
         try:
             self.__check_auth_token(request_obj)
         except Exception as e:
@@ -130,3 +136,18 @@ class BaseRESTMsg(MethodView):
                                          "BaseRestMsg")
         except Exception as e:
             raise
+
+    @staticmethod
+    def _launch_async_handler(async_handler, request_dict):
+        thread = threading.Thread(target=async_handler, args=(request_dict,))
+        thread.start()
+
+    def _send_response(self, response_dict):
+        print "Sending request to %s" % (self.url_response,)
+
+        # TODO check if connection exist
+        response = requests.post(self.url_response, json=response_dict)
+
+        print "Receive ack from %s" % (self.url_response,)
+
+        print json.dumps(response.json(), indent=4, sort_keys=True)

@@ -1,6 +1,7 @@
 import os
 import jwt
 import datetime
+import threading
 from database.user import users, blacklisted_tokens
 
 
@@ -9,6 +10,7 @@ class AuthManager(object):
     def __init__(self):
         self.handlers = []
         self.secret_key = str(os.urandom(24))
+        self._auth_manager_lock = threading.RLock()
 
     def get_handlers(self):
         return self.handlers
@@ -19,6 +21,9 @@ class AuthManager(object):
     def add_handler_list(self, handler_list):
         for handler in handler_list:
             self.handlers.append(handler)
+
+    def get_lock(self):
+        return self._auth_manager_lock
 
     def encode_auth_token(self, user_id):
         try:

@@ -30,7 +30,7 @@ class Config(object):
             raise Exception("error '%s' while convert '%s' to json"
                             % (e, self.file_path,))
 
-        print json.dumps(self.config_dict, indent=4, sort_keys=True)
+        # self.print_all_config()
 
     def get_full_config(self):
         self.read_config()
@@ -48,4 +48,5 @@ class Config(object):
 
         return sub_config
 
-
+    def print_all_config(self):
+        print json.dumps(self.config_dict, indent=4, sort_keys=True)

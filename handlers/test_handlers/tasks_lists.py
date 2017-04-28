@@ -37,6 +37,7 @@ class TasksList(BaseRESTMsg):
     # get tasks
     def get(self):
         print('%s | Receive get request' % MODULE_NAME)
+        time.sleep(3)
         return jsonify({'tasks': tasks})
 
     # Asynchronous message
@@ -74,11 +75,11 @@ class TasksList(BaseRESTMsg):
         data = {'status': 'Done', 'task': task}
 
         # TODO check if connection exist
-        response = requests.post(self.url_response, json=data)
+        res = requests.post(self.url_response, json=data)
 
         print('%s | Receive ack from %s' % (MODULE_NAME, self.url_response))
-        print json.dumps(response.json(), indent=4, sort_keys=True)
+        print json.dumps(res.json(), indent=4, sort_keys=True)
 
-        self.messenger.print_attributes()
+        # self.messenger.print_attributes()
 
         return

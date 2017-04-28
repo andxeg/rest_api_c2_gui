@@ -40,9 +40,6 @@ class LoginRESTMsg(BaseAuthMsg):
             return make_response(jsonify(response_object)), 200
 
         except Exception as e:
-            print e
-            response_object = {
-                "status": "fail",
-                "message": "Try again"
-            }
+            response_object = self.create_error_msg(print_info=e,
+                                                    message=e)
             return make_response(jsonify(response_object)), 500
