@@ -10,14 +10,21 @@ from handlers.base_response import BaseResponse
 
 
 class AccountResponse(BaseResponse):
-    def __init__(self, request_id, code, message, exception,
+    def __init__(self,
+                 request_id=None,
+                 code=None,
+                 message=None,
+                 exception=None,
                  account_private_id=None,
                  account_public_id=None,
                  status=None,
                  creation_time=None,
                  update_time=None):
 
-        super(AccountResponse, self).__init__(request_id, code, message, exception)
+        super(AccountResponse, self).__init__(request_id=request_id,
+                                              code=code,
+                                              message=message,
+                                              exception=exception)
         self.attributes = {}
 
         self.accountPrivateId = str(account_private_id)

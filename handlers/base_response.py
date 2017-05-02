@@ -9,7 +9,12 @@ import time
 
 
 class BaseResponse(object):
-    def __init__(self, request_id=None, code=None, message=None, exception=None):
+    def __init__(self,
+                 request_id=None,
+                 code=None,
+                 message=None,
+                 exception=None):
+
         self.response_dict = {}
         self.requestId = request_id
         self.baseResponse = {}

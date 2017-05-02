@@ -10,7 +10,11 @@ from handlers.account.account_response import AccountResponse
 
 
 class GetAccountResponse(AccountResponse):
-    def __init__(self, request_id, code, message, exception,
+    def __init__(self,
+                 request_id=None,
+                 code=None,
+                 message=None,
+                 exception=None,
                  account_private_id=None,
                  account_public_id=None,
                  status=None,
@@ -24,7 +28,10 @@ class GetAccountResponse(AccountResponse):
                  remote_ip=None,
                  external_ip=None):
 
-        super(GetAccountResponse, self).__init__(request_id, code, message, exception,
+        super(GetAccountResponse, self).__init__(request_id=request_id,
+                                                 code=code,
+                                                 message=message,
+                                                 exception=exception,
                                                  account_private_id=account_private_id,
                                                  account_public_id=account_public_id,
                                                  status=status,

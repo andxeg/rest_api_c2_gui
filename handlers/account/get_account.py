@@ -6,6 +6,7 @@ from flask import make_response
 from handlers.account.account_rest_msg import AccountRESTMsg
 
 from handlers.base_response import BaseResponse
+from handlers.account.get_account_response import GetAccountResponse
 
 
 class GetAccountInfo(AccountRESTMsg):
@@ -34,9 +35,6 @@ class GetAccountInfo(AccountRESTMsg):
 
             response_dict = response_object.get_response_dict()
 
-            # response_object = self._create_error_msg(print_info=e,
-            #                                          message=e)
-
             return make_response(jsonify(response_dict)), 500
 
         print "request-> ", request
@@ -49,11 +47,41 @@ class GetAccountInfo(AccountRESTMsg):
         }
 
         if self.method == "short":
-            response_object = {
-                "account": account
-            }
+            # response_object = {
+            #     "account": account
+            # }
 
-            return make_response(jsonify(response_object)), 200
+            # TODO Take this info from database
+            creation_time = int(time.time()) - 1000
+            update_time = int(time.time()) - 1000
+            password = "password"
+            tag1 = 123456
+            tag2 = 1000
+            tag1_type = "VXLAN"
+            tag2_type = "VLAN"
+            remote_ip = "1.1.1.1"
+            external_ip = "4.4.4.4"
+
+            response_object = GetAccountResponse(request_id=self.requestId,
+                                                 code=200,
+                                                 message=None,
+                                                 exception=None,
+                                                 account_private_id=self.accountPrivateId,
+                                                 account_public_id=self.accountPublicId,
+                                                 status="ACTIVE",
+                                                 creation_time=str(creation_time),
+                                                 update_time=str(update_time),
+                                                 password=password,
+                                                 tag1=str(tag1),
+                                                 tag2=str(tag2),
+                                                 tag1_type=tag1_type,
+                                                 tag2_type=tag2_type,
+                                                 remote_ip=remote_ip,
+                                                 external_ip=external_ip)
+
+            response_dict = response_object.get_response_dict()
+
+            return make_response(jsonify(response_dict)), 200
 
         elif self.method == "full":
             self._launch_async_handler(self.async_handler, self.request_dict)
