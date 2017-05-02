@@ -44,6 +44,8 @@ class BaseRESTMsg(MethodView):
 
     @classmethod
     def _create_error_msg(cls, print_info=None, message=None):
+        # TODO implement creation error message through class BaseResponse
+
         print str(print_info)
 
         error_msg = {
@@ -150,6 +152,9 @@ class BaseRESTMsg(MethodView):
         print "Sending request to %s" % (self.url_response,)
 
         # TODO check if connection exist
+        # TODO try send response several times
+        # TODO check if ack was returned
+
         response = requests.post(self.url_response, json=response_dict)
 
         print "Receive ack from %s" % (self.url_response,)

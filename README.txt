@@ -12,4 +12,5 @@
 
 10. Python datetime.
     How create from string datetime object -> http://stackoverflow.com/questions/466345/converting-string-into-datetime
+    strptime
     Read also -> http://strftime.org/

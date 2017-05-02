@@ -5,6 +5,8 @@ from flask import request
 from flask import make_response
 from handlers.account.account_rest_msg import AccountRESTMsg
 
+from handlers.base_response import BaseResponse
+
 
 class GetAccountInfo(AccountRESTMsg):
     url_request = AccountRESTMsg.url_request + "/get"
@@ -22,10 +24,20 @@ class GetAccountInfo(AccountRESTMsg):
         try:
             self._parse_request(request_obj)
         except Exception as e:
-            response_object = self._create_error_msg(print_info=e,
-                                                     message=e)
 
-            return make_response(jsonify(response_object)), 500
+            # def __init__(self, request_id=None, code=None, message=None, exception=None):
+
+            response_object = BaseResponse(request_id=self.requestId,
+                                           code=str(500),
+                                           message=e,
+                                           exception=e)
+
+            response_dict = response_object.get_response_dict()
+
+            # response_object = self._create_error_msg(print_info=e,
+            #                                          message=e)
+
+            return make_response(jsonify(response_dict)), 500
 
         print "request-> ", request
         print "request.json -> ", json.dumps(request.json, indent=4, sort_keys=True)

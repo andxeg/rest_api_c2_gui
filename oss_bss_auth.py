@@ -1,6 +1,8 @@
 import json
 import os
 
+import copy
+import random
 import requests
 
 from config.config import Config
@@ -67,10 +69,20 @@ if __name__ == '__main__':
         "method": "full"
     }
 
-    for i in range(3):
+    msg_count = 1
+    data_set = []
+    methods = ["short", "full"]
+    for i in range(msg_count):
+        data["method"] = methods[random.randint(0, 1)]
+        data_set.append(copy.deepcopy(data))
+
+    for d in data_set:
+        print json.dumps(d, indent=4, sort_keys=True)
+
+    for msg in data_set:
         print("%s | Before send request to '%s'" % (MODULE_NAME, C2_GET_ACCOUNT_INFO))
         response = requests.post(C2_GET_ACCOUNT_INFO,
-                                 json=data,
+                                 json=msg,
                                  verify=verify,
                                  headers={
                                      "Authorization": "Bearer " + auth_token

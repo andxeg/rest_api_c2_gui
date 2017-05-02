@@ -17,7 +17,3 @@ OS:
         b.  http://www.akadia.com/services/ssh_test_certificate.html
         c.  Эффект такое же, как и в предыдущих ссылках
             !!!!http://unix.stackexchange.com/questions/90450/adding-a-self-signed-certificate-to-the-trusted-list
-
-
-    2.
-    3.
