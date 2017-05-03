@@ -1,14 +1,15 @@
-Needed library.
-
 PYTHON:
-!   1.  pip install Flask
-    2.  flask_httpauth
-!   3.  For requests -> pip install requests
-!   4.  For HTTPS -> pip install pyopenssl
-!   5.  pip install -U requests[security]
-!   6.  Install not for Python 2.7 Json Web Token -> pip install pyjwt==1.4.2
+    1.  pip install Flask
+    2. pip install requests
+    3. pip install pyopenssl
+    4.  Install not for Python 2.7 Json Web Token -> pip install pyjwt==1.4.2
         Before installation uninstall old jwt and pyjwt
-    7.  Не нужно. pip install Flask-Bcrypt
+        Run:
+            pip uninstall jwt
+            pip uninstall pyjwt
+            pip install pyjwt==1.4.2
+
+??? 5.  pip install -U requests[security]
 
 OS:
 !   1.  openssl. Generate keys.

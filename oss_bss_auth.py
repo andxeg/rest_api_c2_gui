@@ -37,12 +37,13 @@ if __name__ == '__main__':
     rest_messenger = RESTMessenger(server_config=oss_bss_config_dict,
                                    client_config=c2_config_dict,
                                    async=False,
-                                   ssl=False)
+                                   ssl=True)
 
     # rest_messenger.print_attributes()
     add_handlers(rest_messenger)
 
-    verify = oss_bss_config_dict["ssl"]["verify"]
+    verify = rest_messenger.get_verify_crt()
+    print verify
 
     # Authentication. Get token from server
     data = {
@@ -72,7 +73,7 @@ if __name__ == '__main__':
     msg_count = 1
     data_set = []
     # methods = ["short", "full"]
-    methods = ["short"]
+    methods = ["full"]
     for i in range(msg_count):
         data["method"] = methods[random.randrange(0, len(methods))]
         data_set.append(copy.deepcopy(data))

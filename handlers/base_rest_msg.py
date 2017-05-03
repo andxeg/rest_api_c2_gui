@@ -155,7 +155,8 @@ class BaseRESTMsg(MethodView):
         # TODO try send response several times
         # TODO check if ack was returned
 
-        response = requests.post(self.url_response, json=response_dict)
+        verify = self.messenger.get_verify_crt()
+        response = requests.post(self.url_response, json=response_dict, verify=verify)
 
         print "Receive ack from %s" % (self.url_response,)
 

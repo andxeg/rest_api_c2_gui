@@ -27,6 +27,11 @@ class RESTMessenger(object):
         self.response_address = None
         self.context = None
 
+        # Need for sending request to remote client
+        self.verify_crt_path = None
+
+        self.__set_verify_certificate(client_config)
+
         if async is True:
             self.__set_notify_address(client_config)
 
@@ -66,13 +71,25 @@ class RESTMessenger(object):
             if not callable(attr):
                 print "Name -> '%s', Value -> '%s'" % (attr_name, str(attr),)
 
+    def __set_verify_certificate(self, client_config):
+        try:
+            ssl = client_config["ssl"]
+            if "verify" in ssl:
+                self.verify_crt_path = ssl["verify"]
+        except KeyError as e:
+            import traceback
+            traceback.print_exc()
+            raise Exception("error '%s' while read verify certificate path" % (e,))
+
     def __set_notify_address(self, client_config):
         try:
-            notify = "http://" + \
-                     client_config["host"] + \
-                     ':' + \
-                     client_config["port"] + \
-                     '/' + \
+            prefix = "http://"
+            if self.verify_crt_path:
+                prefix = "https://"
+
+            notify = prefix + \
+                     client_config["host"] + ':' + \
+                     client_config["port"] + '/' + \
                      client_config["notify"]
         except KeyError as e:
             import traceback
@@ -106,3 +123,9 @@ class RESTMessenger(object):
         handlers = self.auth_manager.get_handlers()
         for handler in handlers:
             self.add_handler(handler.url_request, handler, handler.methods, async=False)
+
+    def get_verify_crt(self):
+        if self.verify_crt_path:
+            return self.verify_crt_path
+
+        return False
