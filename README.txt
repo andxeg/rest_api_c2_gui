@@ -14,3 +14,7 @@
     How create from string datetime object -> http://stackoverflow.com/questions/466345/converting-string-into-datetime
     strptime
     Read also -> http://strftime.org/
+
+
+11. Flask for production. See -> Deploying to the web-server.
+    http://flask.pocoo.org/docs/0.12/quickstart/#deploying-to-a-web-server

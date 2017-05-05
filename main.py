@@ -8,6 +8,7 @@ from handlers.account.get_account import GetAccountInfo
 from handlers.test_handlers.tasks_lists import TasksList
 from rest_messenger import RESTMessenger
 
+
 CONFIG_FILE = "./config/rest_config.json"
 
 

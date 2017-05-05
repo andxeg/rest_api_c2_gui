@@ -16,7 +16,7 @@ def add_handlers(messenger):
     messenger.add_handler(GetAccountInfo.url_request, GetAccountInfo, GetAccountInfo.methods, async=True)
 
 
-def start_rest():
+def create_rest_messenger():
     # TODO RESTMessenger go into infinite loop
     # TODO If you want to use it you must launch messenger in thread
 
@@ -43,6 +43,10 @@ def start_rest():
     auth_manager.add_handler_list(handler_list)
     rest_messenger.set_auth_manager(auth_manager)
 
-    rest_messenger.run(threaded=True)
+    return rest_messenger
 
-    print "FINISH"
+
+def start_rest_messenger(rest_messenger):
+    print "REST WAS STARTED"
+    rest_messenger.run(threaded=True)
+    print "REST WAS FINISHED"

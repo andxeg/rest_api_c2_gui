@@ -70,10 +70,10 @@ if __name__ == '__main__':
         "method": "full"
     }
 
-    msg_count = 1
+    msg_count = 3
     data_set = []
-    # methods = ["short", "full"]
-    methods = ["full"]
+    methods = ["short", "full"]
+    # methods = ["full"]
     for i in range(msg_count):
         data["method"] = methods[random.randrange(0, len(methods))]
         data_set.append(copy.deepcopy(data))

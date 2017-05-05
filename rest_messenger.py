@@ -1,6 +1,12 @@
 import os
+import uuid
+import json
+import requests
+from flask import request
 from flask import Flask
 from OpenSSL import SSL
+from handlers.special.server_shutdown import ServerShutdown
+
 
 # TODO. Messenger is singleton or not?
 
@@ -17,6 +23,10 @@ class RESTMessenger(object):
         """
 
         self.app = Flask(__name__)
+
+        # Need for shutting down
+        self.shutdown_token = None
+
         self.auth_manager = None
         self.host = server_config.get("host", "127.0.0.1")
         self.port = server_config.get("port", "5000")
@@ -63,6 +73,45 @@ class RESTMessenger(object):
                      debug=self.debug,
                      ssl_context=self.context,
                      threaded=threaded)
+
+    def get_shutdown_token(self):
+        result = None
+        field = "shutdown_token"
+        if hasattr(self, field):
+            result = getattr(self, field)
+
+        return result
+
+    def terminate(self):
+        # TODO terminate rest messenger
+        # TODO First server stops to receive messages
+        # TODO Second wait all threads will be terminate
+        # TODO Third terminate rest
+
+        # Terminate server
+        self.shutdown_token = str(uuid.uuid4())
+        print self.shutdown_token
+
+        self.add_handler(ServerShutdown.url_request, ServerShutdown, ServerShutdown.methods, async=False)
+
+        prefix = "http://"
+
+        if self.context is not None:
+            prefix = "https://"
+        
+        shutdown_url = prefix + self.host + ':' + self.port + self.base_url + '/' + ServerShutdown.url_request
+
+        request_dict = {
+            "token": self.shutdown_token
+        }
+        response = requests.post(shutdown_url, json=request_dict, verify=False)
+        response_dict = response.json()
+        try:
+            if response_dict and response_dict["token"] == self.shutdown_token:
+                return
+        except Exception as e:
+            print e
+            print "Server is still running"
 
     def print_attributes(self):
         attributes = dir(self)
