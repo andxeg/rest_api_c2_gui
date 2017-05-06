@@ -9,7 +9,7 @@ def work_before_timeout(messenger):
     work_time = 30
 
     while True:
-        print "Main Thread"
+        print "Main Thread\n"
         time.sleep(5)
         current_time = int(time.time())
         if current_time - start_time >= work_time:

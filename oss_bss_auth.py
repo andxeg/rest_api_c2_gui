@@ -43,7 +43,6 @@ if __name__ == '__main__':
     add_handlers(rest_messenger)
 
     verify = rest_messenger.get_verify_crt()
-    print verify
 
     # Authentication. Get token from server
     data = {

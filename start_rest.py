@@ -47,6 +47,6 @@ def create_rest_messenger():
 
 
 def start_rest_messenger(rest_messenger):
-    print "REST WAS STARTED"
+    print "REST WAS STARTED\n"
     rest_messenger.run(threaded=True)
-    print "REST WAS FINISHED"
+    print "REST WAS FINISHED\n"

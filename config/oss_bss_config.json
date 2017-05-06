@@ -3,7 +3,7 @@
 		"host": "0.0.0.0",
     	"port": "5007",
 		"ssl" : {
-			"verify": "./ssl/self_signed.crt"
+			"verify": "ssl/self_signed.crt"
 		}
 	},
 
@@ -13,8 +13,8 @@
         "debug": false,
         "base_url": "",
 		"ssl" : {
-			"key": "./ssl/private.key",
-			"crt": "./ssl/self_signed.crt"
+			"key": "ssl/private.key",
+			"crt": "ssl/self_signed.crt"
 		}
 	}
 }

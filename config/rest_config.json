@@ -5,8 +5,8 @@
     	"debug": false,
 		"base_url": "/todo/api/v1.0",
 		"ssl" : {
-			"key": "./ssl/private.key",
-			"crt": "./ssl/self_signed.crt"
+			"key": "ssl/private.key",
+			"crt": "ssl/self_signed.crt"
 		}
 	},
 
@@ -15,7 +15,7 @@
         "host": "0.0.0.0",
         "port": "5001",
 		"ssl": {
-			"verify": "./ssl/self_signed.crt"
+			"verify": "ssl/self_signed.crt"
 		}
 	}
 }

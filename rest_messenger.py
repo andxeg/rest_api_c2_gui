@@ -94,17 +94,20 @@ class RESTMessenger(object):
 
         self.add_handler(ServerShutdown.url_request, ServerShutdown, ServerShutdown.methods, async=False)
 
+        verify = False
         prefix = "http://"
 
         if self.context is not None:
             prefix = "https://"
+            verify = self.context[0]
         
         shutdown_url = prefix + self.host + ':' + self.port + self.base_url + '/' + ServerShutdown.url_request
 
         request_dict = {
             "token": self.shutdown_token
         }
-        response = requests.post(shutdown_url, json=request_dict, verify=False)
+
+        response = requests.post(shutdown_url, json=request_dict, verify=verify)
         response_dict = response.json()
         try:
             if response_dict and response_dict["token"] == self.shutdown_token:
@@ -152,6 +155,7 @@ class RESTMessenger(object):
         try:
             private_key = server_config["key"]
             certificate = server_config["crt"]
+
             # TODO Add check existence of this files
             # TODO
             key = os.path.join(os.path.dirname(__file__), private_key)

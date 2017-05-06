@@ -1,20 +1,19 @@
-PYTHON:
-    1.  pip install Flask
-    2. pip install requests
-    3. pip install pyopenssl
+THIS FILE DESCRIBE ALL REQUIREMENTS FOR REST_PROGRAM START
+
+=======================================PYTHON==================================
+    1.  $ pip install Flask
+    2.  $ pip install requests
+    3.  $ pip install pyopenssl
     4.  Install not for Python 2.7 Json Web Token -> pip install pyjwt==1.4.2
         Before installation uninstall old jwt and pyjwt
         Run:
-            pip uninstall jwt
-            pip uninstall pyjwt
-            pip install pyjwt==1.4.2
+            $ pip uninstall jwt
+            $ pip uninstall pyjwt
+            $ pip install pyjwt==1.4.2
 
-??? 5.  pip install -U requests[security]
+??? 5.  $ pip install -U requests[security]
 
-OS:
-!   1.  openssl. Generate keys.
-        a.  openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout private.key -out self_signed.crt -subj /CN=0.0.0.0
-            CN - Common Name
-        b.  http://www.akadia.com/services/ssh_test_certificate.html
-        c.  Эффект такое же, как и в предыдущих ссылках
-            !!!!http://unix.stackexchange.com/questions/90450/adding-a-self-signed-certificate-to-the-trusted-list
+
+=========================================OS====================================
+    1. Install openssl
+        $ sudo apt-get install openssl
