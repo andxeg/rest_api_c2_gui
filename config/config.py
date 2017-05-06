@@ -32,6 +32,9 @@ class Config(object):
 
         # self.print_all_config()
 
+    def read_config_from_dict(self, config_dict):
+        self.config_dict = config_dict
+
     def get_full_config(self):
         self.read_config()
         return self.config_dict

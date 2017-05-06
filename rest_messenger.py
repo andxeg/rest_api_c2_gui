@@ -127,7 +127,7 @@ class RESTMessenger(object):
         try:
             ssl = client_config["ssl"]
             if "verify" in ssl:
-                self.verify_crt_path = ssl["verify"]
+                self.verify_crt_path = os.path.dirname(os.path.abspath(__file__)) + '/' + ssl["verify"]
         except KeyError as e:
             import traceback
             traceback.print_exc()
